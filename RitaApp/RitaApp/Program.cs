@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using RitaApp.Data;
+using RitaApp.Repositories;
+using RitaApp.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +16,14 @@ builder.Services.AddDbContext<RitaAppDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("RitaAppConnectionString"));
 });
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+builder.Services.AddScoped<ICategoryService, CategoryService>();
+builder.Services.AddScoped<IMagazineRepository, MagazineRepository>();
+builder.Services.AddScoped<IMagazineService, MagazineService>();
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<IProductService, ProductService>();
+
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 var app = builder.Build();
 
