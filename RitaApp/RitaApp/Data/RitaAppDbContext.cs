@@ -17,5 +17,27 @@ namespace RitaApp.Data
         public DbSet<Unit>Units => Set<Unit>();
         public DbSet<User>Users => Set<User>();
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Category>()
+                .Property(e => e.CreatedDate)
+                .HasDefaultValueSql("GETDATE()");
+            modelBuilder.Entity<Magazine>()
+                .Property(e => e.CreatedDate)
+                .HasDefaultValueSql("GETDATE()");
+            modelBuilder.Entity<Product>()
+                .Property(e => e.CreatedDate)
+                .HasDefaultValueSql("GETDATE()");
+            modelBuilder.Entity<ProductCard>()
+                .Property(e => e.CreatedDate)
+                .HasDefaultValueSql("GETDATE()");
+            modelBuilder.Entity<Unit>()
+                .Property(e => e.CreatedDate)
+                .HasDefaultValueSql("GETDATE()");
+            modelBuilder.Entity<User>()
+                .Property(e => e.CreatedDate)
+                .HasDefaultValueSql("GETDATE()");
+        }
+
     }
 }

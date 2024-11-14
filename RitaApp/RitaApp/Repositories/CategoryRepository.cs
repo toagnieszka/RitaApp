@@ -12,6 +12,13 @@ namespace RitaApp.Repositories
             _context = context;
         }
 
+        public async Task<Category> Create(Category category)
+        {
+            await _context.Categories.AddAsync(category);
+            await _context.SaveChangesAsync();
+            return category;
+        }
+
         public Task<List<Category>> GetAll()
         {
             var categories = _context.Categories.ToListAsync();

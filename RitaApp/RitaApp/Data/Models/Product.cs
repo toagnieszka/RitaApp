@@ -14,5 +14,6 @@ namespace RitaApp.Data.Models
         public DateTime LoanDate { get; set; }
         public string Lender { get; set; }
         public string Borrower { get; set; }
+        public DateTime CreatedDate { get; set; }
     }
 }

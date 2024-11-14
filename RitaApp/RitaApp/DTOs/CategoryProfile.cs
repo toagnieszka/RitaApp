@@ -8,6 +8,8 @@ namespace RitaApp.DTOs
         public CategoryProfile()
         {
             CreateMap<Category, CategoryDto>();
+
+            CreateMap<CreateCategoryDto, Category>();
         }
     }
 }

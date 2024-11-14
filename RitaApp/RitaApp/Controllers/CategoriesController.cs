@@ -22,5 +22,12 @@ namespace RitaApp.Controllers
             var projectsDtos = await _categoryService.GetAll();
             return Ok(projectsDtos);
         }
+
+        [HttpPost]
+        public async Task<ActionResult> Create(CreateCategoryDto createCategoryDto)
+        {
+            var categoryDto = await _categoryService.Create(createCategoryDto);
+            return Ok(categoryDto);
+        }
     }
 }
