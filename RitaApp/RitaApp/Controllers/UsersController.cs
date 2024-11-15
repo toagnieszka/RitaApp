@@ -22,5 +22,12 @@ namespace RitaApp.Controllers
             var usersDto = await _userService.GetAll();
             return Ok(usersDto);
         }
+
+        [HttpPost]
+        public async Task<ActionResult> Create(CreateUserDto createUserDto)
+        {
+            var userDto = await _userService.Create(createUserDto);
+            return Ok(userDto);
+        }
     }
 }

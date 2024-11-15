@@ -8,6 +8,7 @@ namespace RitaApp.DTOs
         public UserProfile() 
         {
             CreateMap<User, UserDto>();
+            CreateMap<CreateUserDto, User>();
         }
     }
 }

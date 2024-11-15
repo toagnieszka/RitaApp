@@ -12,6 +12,13 @@ namespace RitaApp.Repositories
             _context = context;
         }
 
+        public async Task<Unit> Create(Unit unit)
+        {
+            await _context.Units.AddAsync(unit);
+            await _context.SaveChangesAsync();
+            return unit;
+        }
+
         public async Task<List<Unit>> GetAll()
         {
             var units = await _context.Units.ToListAsync();

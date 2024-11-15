@@ -22,5 +22,12 @@ namespace RitaApp.Controllers
             var magazineDtos = await _magazinesService.GetAll();
             return Ok(magazineDtos);
         }
+
+        [HttpPost]
+        public async Task<ActionResult> Create(CreateMagazineDto createMagazineDto)
+        {
+            var magazineDto = await _magazinesService.Create(createMagazineDto);
+            return Ok(magazineDto);
+        }
     }
 }

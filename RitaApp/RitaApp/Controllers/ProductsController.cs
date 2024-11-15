@@ -22,5 +22,12 @@ namespace RitaApp.Controllers
             var productsDto = await _productService.GetAll();
             return Ok(productsDto);
         }
+
+        [HttpPost]
+        public async Task<ActionResult> Create(CreateProductDto createProductDto)
+        {
+            var productDto = await _productService.Create(createProductDto);
+            return Ok(productDto);
+        }
     }
 }

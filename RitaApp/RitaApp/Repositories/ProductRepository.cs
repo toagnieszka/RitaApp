@@ -12,6 +12,13 @@ namespace RitaApp.Repositories
             _context = context;
         }
 
+        public async Task<Product> Create(Product product)
+        {
+            await _context.Products.AddAsync(product);
+            await _context.SaveChangesAsync();
+            return product;
+        }
+
         public async Task<List<Product>> GetAll()
         {
             var products = await _context.Products.ToListAsync();

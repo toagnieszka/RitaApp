@@ -8,6 +8,7 @@ namespace RitaApp.DTOs
         public ProductCardProfile()
         {
             CreateMap<ProductCard, ProductCardDto>();
+            CreateMap<CreateProductCardDto, ProductCard>();
         }
     }
 }

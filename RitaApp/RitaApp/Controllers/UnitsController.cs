@@ -21,5 +21,12 @@ namespace RitaApp.Controllers
             var unitsDto = await _unitService.GetAll();
             return Ok(unitsDto);
         }
+
+        [HttpPost]
+        public async Task<ActionResult> Create(CreateUnitDto createUnitDto)
+        {
+            var unitDto = await _unitService.Create(createUnitDto);
+            return Ok(unitDto);
+        }
     }
 }

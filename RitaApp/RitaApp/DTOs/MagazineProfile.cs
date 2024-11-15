@@ -8,6 +8,8 @@ namespace RitaApp.DTOs
         public MagazineProfile()
         {
             CreateMap<Magazine, MagazineDto>();
+
+            CreateMap<CreateMagazineDto, Magazine>();
         }
     }
 }
