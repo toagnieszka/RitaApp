@@ -1,4 +1,5 @@
 ﻿using RitaApp.DTOs;
+using RitaApp.DTOs.CreateDto;
 
 namespace RitaApp.Services
 {

@@ -1,4 +1,4 @@
-﻿namespace RitaApp.DTOs
+﻿namespace RitaApp.DTOs.CreateDto
 {
     public class CreateMagazineDto
     {

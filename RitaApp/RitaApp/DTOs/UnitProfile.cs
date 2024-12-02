@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using RitaApp.Data.Models;
+using RitaApp.DTOs.CreateDto;
 
 namespace RitaApp.DTOs
 {

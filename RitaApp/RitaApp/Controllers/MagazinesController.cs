@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using RitaApp.DTOs;
+using RitaApp.DTOs.CreateDto;
 using RitaApp.Services;
 
 namespace RitaApp.Controllers
