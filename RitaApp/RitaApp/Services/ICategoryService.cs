@@ -6,6 +6,7 @@ namespace RitaApp.Services
     public interface ICategoryService 
     {
         public Task<List<CategoryDto>> GetAll();
+        public Task<CategoryDto> GetById(int id);
         public Task<CategoryDto> Create(CreateCategoryDto createCategoryDto);
     }
 }

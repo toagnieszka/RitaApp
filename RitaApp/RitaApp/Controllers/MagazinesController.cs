@@ -24,6 +24,13 @@ namespace RitaApp.Controllers
             return Ok(magazineDtos);
         }
 
+        [HttpGet("{id}")]
+        public async Task<ActionResult<MagazineDto>> GetById([FromRoute] int id)
+        {
+            var magazineDto = await _magazinesService.GetById(id);
+            return Ok(magazineDto);
+        }
+
         [HttpPost]
         public async Task<ActionResult> Create(CreateMagazineDto createMagazineDto)
         {

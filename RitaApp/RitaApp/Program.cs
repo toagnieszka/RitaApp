@@ -16,17 +16,11 @@ builder.Services.AddDbContext<RitaAppDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("RitaAppConnectionString"));
 });
-builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
-builder.Services.AddScoped<IMagazineRepository, MagazineRepository>();
 builder.Services.AddScoped<IMagazineService, MagazineService>();
-builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<IProductService, ProductService>();
-builder.Services.AddScoped<IProductCardRepository, ProductCardRepository>();
 builder.Services.AddScoped<IProductCardService, ProductCardService>();
-builder.Services.AddScoped<IUnitRepository, UnitRepository>();
 builder.Services.AddScoped<IUnitService, UnitService>();
-builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 

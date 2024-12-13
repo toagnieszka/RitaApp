@@ -2,11 +2,11 @@
 using RitaApp.Data.Models;
 using RitaApp.DTOs.CreateDto;
 
-namespace RitaApp.DTOs
+namespace RitaApp.DTOs.Mappings
 {
     public class UnitProfile : Profile
     {
-        public UnitProfile() 
+        public UnitProfile()
         {
             CreateMap<Unit, UnitDto>();
             CreateMap<CreateUnitDto, Unit>();

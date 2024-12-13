@@ -18,19 +18,25 @@ namespace RitaApp.Services
             this.productCardRepository = productCardRepository;
             _mapper = mapper;
         }
+        public async Task<List<ProductCardDto>> GetAll()
+        {
+            var productCards = await this.productCardRepository.GetAll();
+            var productCardsDto = _mapper.Map<List<ProductCardDto>>(productCards);
+            return productCardsDto;
+        }
+
+        public async Task<ProductCardDto> GetById(int id)
+        {
+            var productCard = await this.productCardRepository.GetById(id);
+            var productCardDto = _mapper.Map<ProductCardDto>(productCard);
+            return productCardDto;
+        }
 
         public async Task<ProductCardDto> Create(CreateProductCardDto createProductCardDto)
         {
             var productCard = _mapper.Map<ProductCard>(createProductCardDto);
             productCard = await this.productCardRepository.Create(productCard);
             return _mapper.Map<ProductCardDto>(productCard);
-        }
-
-        public async Task<List<ProductCardDto>> GetAll()
-        {
-            var productCards = await this.productCardRepository.GetAll();
-            var productCardsDto = _mapper.Map<List<ProductCardDto>>(productCards);
-            return productCardsDto;
         }
     }
 }

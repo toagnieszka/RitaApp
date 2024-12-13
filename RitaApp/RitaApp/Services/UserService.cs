@@ -20,18 +20,25 @@ namespace RitaApp.Services
             _mapper = mapper;
         }
 
-        public async Task<UserDto> Create(CreateUserDto createUserDto)
-        {
-            var user = _mapper.Map<User>(createUserDto);
-            user = await this.userRepository.Create(user);
-            return _mapper.Map<UserDto>(user);
-        }
-
         public async Task<List<UserDto>> GetAll()
         {
             var users = await this.userRepository.GetAll();
             var usersDto = _mapper.Map<List<UserDto>>(users);
             return usersDto;
+        }
+
+        public async Task<UserDto> GetById(int id)
+        {
+            var user = await this.userRepository.GetById(id);
+            var userDto = _mapper.Map<UserDto>(user);
+            return userDto;
+        }
+
+        public async Task<UserDto> Create(CreateUserDto createUserDto)
+        {
+            var user = _mapper.Map<User>(createUserDto);
+            user = await this.userRepository.Create(user);
+            return _mapper.Map<UserDto>(user);
         }
     }
 }

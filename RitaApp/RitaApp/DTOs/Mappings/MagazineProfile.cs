@@ -2,7 +2,7 @@
 using RitaApp.Data.Models;
 using RitaApp.DTOs.CreateDto;
 
-namespace RitaApp.DTOs
+namespace RitaApp.DTOs.Mappings
 {
     public class MagazineProfile : Profile
     {

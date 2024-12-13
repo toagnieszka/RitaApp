@@ -20,18 +20,25 @@ namespace RitaApp.Services
             _mapper = mapper;
         }
 
-        public async Task<UnitDto> Create(CreateUnitDto createUnitDto)
-        {
-            var unit = _mapper.Map<Unit>(createUnitDto);
-            unit = await this.unitRepository.Create(unit);
-            return _mapper.Map<UnitDto>(unit);
-        }
-
         public async Task<List<UnitDto>> GetAll()
         {
             var units = await this.unitRepository.GetAll();
             var unitsDto = _mapper.Map<List<UnitDto>>(units);
             return unitsDto;
+        }
+
+        public async Task<UnitDto> GetById(int id)
+        {
+            var unit = await this.unitRepository.GetById(id);
+            var unitDto = _mapper.Map<UnitDto>(unit);
+            return unitDto;
+        }
+
+        public async Task<UnitDto> Create(CreateUnitDto createUnitDto)
+        {
+            var unit = _mapper.Map<Unit>(createUnitDto);
+            unit = await this.unitRepository.Create(unit);
+            return _mapper.Map<UnitDto>(unit);
         }
     }
 }

@@ -24,6 +24,13 @@ namespace RitaApp.Controllers
             return Ok(projectsDtos);
         }
 
+        [HttpGet("{id}")]
+        public async Task<ActionResult<CategoryDto>> GetById([FromRoute] int id)
+        {
+            var categoryDto = await _categoryService.GetById(id);
+            return Ok(categoryDto);
+        }
+
         [HttpPost]
         public async Task<ActionResult> Create(CreateCategoryDto createCategoryDto)
         {

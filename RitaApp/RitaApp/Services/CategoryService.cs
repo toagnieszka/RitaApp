@@ -19,18 +19,25 @@ namespace RitaApp.Services
             _mapper = mapper;
         }
 
-        public async Task<CategoryDto> Create(CreateCategoryDto createCategoryDto)
-        {
-            var category = _mapper.Map<Category>(createCategoryDto);
-            category = await this.categoryRepository.Create(category);
-            return _mapper.Map<CategoryDto>(category); 
-        }
-
         public async Task<List<CategoryDto>> GetAll()
         {
             var categories = await this.categoryRepository.GetAll();
             var categoriesDtos = _mapper.Map<List<CategoryDto>>(categories);
             return categoriesDtos;
+        }
+
+        public async Task<CategoryDto> GetById(int id)
+        {
+            var category = await this.categoryRepository.GetById(id);
+            var categoryDto = _mapper.Map<CategoryDto>(category);
+            return categoryDto;
+        }
+
+        public async Task<CategoryDto> Create(CreateCategoryDto createCategoryDto)
+        {
+            var category = _mapper.Map<Category>(createCategoryDto);
+            category = await this.categoryRepository.Create(category);
+            return _mapper.Map<CategoryDto>(category); 
         }
     }
 }

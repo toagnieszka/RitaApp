@@ -24,6 +24,13 @@ namespace RitaApp.Controllers
             return Ok(productsDto);
         }
 
+        [HttpGet("{id}")]
+        public async Task<ActionResult<ProductDto>> GetById([FromRoute] int id)
+        {
+            var productDto = await _productService.GetById(id);
+            return Ok(productDto);
+        }
+
         [HttpPost]
         public async Task<ActionResult> Create(CreateProductDto createProductDto)
         {

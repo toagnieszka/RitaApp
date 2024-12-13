@@ -6,6 +6,7 @@ namespace RitaApp.Services
     public interface IUnitService
     {
         public Task<List<UnitDto>> GetAll();
+        public Task<UnitDto> GetById(int id);
         public Task<UnitDto> Create(CreateUnitDto createUnitDto);
     }
 }

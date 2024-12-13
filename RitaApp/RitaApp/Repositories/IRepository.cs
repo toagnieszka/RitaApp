@@ -10,7 +10,7 @@ namespace RitaApp.Repositories
 
         Task<T> Create(T entity);
 
-        Task Update(T entity);
+        Task<T> Update(T entity);
 
         Task Delete(int id);
     }

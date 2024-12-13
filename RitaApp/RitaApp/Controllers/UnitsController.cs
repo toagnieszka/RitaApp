@@ -23,6 +23,13 @@ namespace RitaApp.Controllers
             return Ok(unitsDto);
         }
 
+        [HttpGet("{id}")]
+        public async Task<ActionResult<UnitDto>> GetById([FromRoute] int id)
+        {
+            var unitDto = await _unitService.GetById(id);
+            return Ok(unitDto);
+        }
+
         [HttpPost]
         public async Task<ActionResult> Create(CreateUnitDto createUnitDto)
         {
