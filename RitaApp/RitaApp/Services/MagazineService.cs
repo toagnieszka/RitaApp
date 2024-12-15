@@ -46,5 +46,10 @@ namespace RitaApp.Services
             magazine = await this.magazineRepository.Update(magazine);
             return _mapper.Map<MagazineDto>(magazine);
         }
+
+        public Task Delete(int id)
+        {
+            return this.magazineRepository.Delete(id);
+        }
     }
 }

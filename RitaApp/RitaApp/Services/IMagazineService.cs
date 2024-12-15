@@ -10,5 +10,6 @@ namespace RitaApp.Services
         public Task<MagazineDto> GetById(int id);
         public Task<MagazineDto> Create(CreateMagazineDto createMagazineDto);
         public Task<MagazineDto> Update(UpdateMagazineDto updateMagazineDto);
+        public Task Delete(int id);
     }
 }

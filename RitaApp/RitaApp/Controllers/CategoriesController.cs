@@ -45,5 +45,12 @@ namespace RitaApp.Controllers
             var categoryDto = await _categoryService.Update(updateCategoryDto);
             return Ok(categoryDto);
         }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> Delete([FromRoute] int id)
+        {
+            await _categoryService.Delete(id);
+            return NoContent();
+        }
     }
 }

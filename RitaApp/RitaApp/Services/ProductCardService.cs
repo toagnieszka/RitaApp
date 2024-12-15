@@ -46,5 +46,10 @@ namespace RitaApp.Services
             productCard = await this.productCardRepository.Update(productCard);
             return _mapper.Map<ProductCardDto>(productCard);
         }
+
+        public Task Delete(int id)
+        {
+            return this.productCardRepository.Delete(id);
+        }
     }
 }

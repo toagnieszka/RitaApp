@@ -10,6 +10,7 @@ namespace RitaApp.Services
         public Task<ProductCardDto> GetById(int id);
         public Task<ProductCardDto> Create(CreateProductCardDto createProductCardDto);
         public Task<ProductCardDto> Update(UpdateProductCardDto updateProductCardDto);
+        public Task Delete(int id);
 
     }
 }

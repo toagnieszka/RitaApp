@@ -48,5 +48,10 @@ namespace RitaApp.Services
             user = await this.userRepository.Update(user);
             return _mapper.Map<UserDto>(user);
         }
+
+        public Task Delete(int id)
+        {
+            return this.userRepository.Delete(id);
+        }
     }
 }

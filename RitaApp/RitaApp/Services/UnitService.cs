@@ -48,5 +48,10 @@ namespace RitaApp.Services
             unit = await this.unitRepository.Update(unit);
             return _mapper.Map<UnitDto>(unit);
         }
+
+        public Task Delete(int id)
+        {
+            return this.unitRepository.Delete(id);
+        }
     }
 }

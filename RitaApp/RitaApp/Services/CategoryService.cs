@@ -47,5 +47,10 @@ namespace RitaApp.Services
             category = await this.categoryRepository.Update(category);
             return _mapper.Map<CategoryDto>(category);
         }
+
+        public Task Delete(int id)
+        {
+            return this.categoryRepository.Delete(id);
+        }
     }
 }

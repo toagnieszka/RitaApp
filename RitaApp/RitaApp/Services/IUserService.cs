@@ -10,5 +10,6 @@ namespace RitaApp.Services
         public Task<UserDto> GetById(int id);
         public Task<UserDto> Create(CreateUserDto createUserDto);
         public Task<UserDto> Update(UpdateUserDto updateUserDto);
+        public Task Delete(int id);
     }
 }

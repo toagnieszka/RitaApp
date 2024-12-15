@@ -44,5 +44,12 @@ namespace RitaApp.Controllers
             var unitDto = await _unitService.Update(updateUnitDto);
             return Ok(unitDto);
         }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> Delete([FromRoute] int id)
+        {
+            await _unitService.Delete(id);
+            return NoContent();
+        }
     }
 }

@@ -10,5 +10,6 @@ namespace RitaApp.Services
         public Task<CategoryDto> GetById(int id);
         public Task<CategoryDto> Create(CreateCategoryDto createCategoryDto);
         public Task<CategoryDto> Update(UpdateCategoryDto updateCategoryDto);
+        public Task Delete(int id);
     }
 }

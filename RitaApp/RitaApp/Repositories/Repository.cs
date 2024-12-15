@@ -40,11 +40,6 @@ namespace RitaApp.Repositories
             return model;
         }
 
-        public Task Delete(int id)
-        {
-            throw new NotImplementedException();
-        }
-
         public async Task<T> Update(T model)
         {
             var existingModel = await models.FindAsync(model.Id);
@@ -59,6 +54,20 @@ namespace RitaApp.Repositories
             models.Entry(existingModel).Property(x => x.CreatedDate).IsModified = false;
             await _context.SaveChangesAsync();
             return existingModel;
+        }
+
+        public async Task Delete(int id)
+        {
+            var existingModel = await models.FindAsync(id);
+
+
+            if (existingModel is null)
+            {
+                throw new NotFoundException($"Item with id: {id} does not exist");
+            }
+
+            models.Remove(existingModel);
+            await _context.SaveChangesAsync();
         }
     }
 }

@@ -45,5 +45,12 @@ namespace RitaApp.Controllers
             var userDto = await _userService.Update(updateUserDto);
             return Ok(userDto);
         }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> Delete([FromRoute] int id)
+        {
+            await _userService.Delete(id);
+            return NoContent();
+        }
     }
 }

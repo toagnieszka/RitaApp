@@ -44,5 +44,10 @@ namespace RitaApp.Services
             product = await this.productRepository.Update(product);
             return _mapper.Map<ProductDto>(product);
         }
+
+        public Task Delete(int id)
+        {
+            return this.productRepository.Delete(id);
+        }
     }
 }
