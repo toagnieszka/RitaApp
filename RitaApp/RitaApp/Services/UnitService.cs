@@ -3,6 +3,7 @@ using Microsoft.Identity.Client;
 using RitaApp.Data.Models;
 using RitaApp.DTOs;
 using RitaApp.DTOs.CreateDto;
+using RitaApp.DTOs.UpdateDto;
 using RitaApp.Repositories;
 
 namespace RitaApp.Services
@@ -38,6 +39,13 @@ namespace RitaApp.Services
         {
             var unit = _mapper.Map<Unit>(createUnitDto);
             unit = await this.unitRepository.Create(unit);
+            return _mapper.Map<UnitDto>(unit);
+        }
+
+        public async Task<UnitDto> Update(UpdateUnitDto updateUnitDto)
+        {
+            var unit = _mapper.Map<Unit>(updateUnitDto);
+            unit = await this.unitRepository.Update(unit);
             return _mapper.Map<UnitDto>(unit);
         }
     }

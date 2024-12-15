@@ -8,9 +8,9 @@ namespace RitaApp.Repositories
 
         Task<T> GetById(int id);
 
-        Task<T> Create(T entity);
+        Task<T> Create(T model);
 
-        Task<T> Update(T entity);
+        Task<T> Update(T model);
 
         Task Delete(int id);
     }

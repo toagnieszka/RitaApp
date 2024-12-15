@@ -2,6 +2,7 @@
 using RitaApp.Data.Models;
 using RitaApp.DTOs;
 using RitaApp.DTOs.CreateDto;
+using RitaApp.DTOs.UpdateDto;
 using RitaApp.Repositories;
 
 namespace RitaApp.Services
@@ -36,6 +37,13 @@ namespace RitaApp.Services
         {
             var productCard = _mapper.Map<ProductCard>(createProductCardDto);
             productCard = await this.productCardRepository.Create(productCard);
+            return _mapper.Map<ProductCardDto>(productCard);
+        }
+
+        public async Task<ProductCardDto> Update(UpdateProductCardDto updateProductCardDto)
+        {
+            var productCard = _mapper.Map<ProductCard>(updateProductCardDto);
+            productCard = await this.productCardRepository.Update(productCard);
             return _mapper.Map<ProductCardDto>(productCard);
         }
     }

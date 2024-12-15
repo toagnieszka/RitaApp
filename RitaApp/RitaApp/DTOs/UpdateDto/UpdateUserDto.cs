@@ -1,7 +1,8 @@
-﻿namespace RitaApp.Data.Models
+﻿namespace RitaApp.DTOs.UpdateDto
 {
-    public class User : ModelBase
+    public class UpdateUserDto
     {
+        public int Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Password { get; set; }

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using RitaApp.DTOs;
 using RitaApp.DTOs.CreateDto;
+using RitaApp.DTOs.UpdateDto;
 using RitaApp.Services;
 
 namespace RitaApp.Controllers
@@ -32,9 +33,16 @@ namespace RitaApp.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Create(CreateUserDto createUserDto)
+        public async Task<ActionResult> Create([FromBody] CreateUserDto createUserDto)
         {
             var userDto = await _userService.Create(createUserDto);
+            return Ok(userDto);
+        }
+
+        [HttpPut]
+        public async Task<ActionResult<UserDto>> Update([FromBody] UpdateUserDto updateUserDto)
+        {
+            var userDto = await _userService.Update(updateUserDto);
             return Ok(userDto);
         }
     }

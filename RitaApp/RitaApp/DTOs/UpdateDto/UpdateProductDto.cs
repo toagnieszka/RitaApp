@@ -1,9 +1,11 @@
-﻿using System.Diagnostics.Contracts;
+﻿using RitaApp.Data.Models;
+using RitaApp.Data;
 
-namespace RitaApp.Data.Models
+namespace RitaApp.DTOs.UpdateDto
 {
-    public class Product : ModelBase
+    public class UpdateProductDto
     {
+        public int Id { get; set; }
         public ProductCard ProductCard { get; set; }
         public int ProductCardId { get; set; }
         public Magazine Magazine { get; set; }

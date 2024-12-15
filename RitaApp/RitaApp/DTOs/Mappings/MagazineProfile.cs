@@ -11,6 +11,8 @@ namespace RitaApp.DTOs.Mappings
             CreateMap<Magazine, MagazineDto>();
 
             CreateMap<CreateMagazineDto, Magazine>();
+
+            CreateMap<CreateMagazineDto, Magazine>();
         }
     }
 }

@@ -2,6 +2,7 @@
 using RitaApp.Data.Models;
 using RitaApp.DTOs;
 using RitaApp.DTOs.CreateDto;
+using RitaApp.DTOs.UpdateDto;
 using RitaApp.Repositories;
 
 namespace RitaApp.Services
@@ -36,6 +37,13 @@ namespace RitaApp.Services
         {
             var magazine = _mapper.Map<Magazine>(createMagazineDto);
             magazine = await this.magazineRepository.Create(magazine);
+            return _mapper.Map<MagazineDto>(magazine);
+        }
+
+        public async Task<MagazineDto> Update(UpdateMagazineDto updateMagazineDto)
+        {
+            var magazine = _mapper.Map<Magazine>(updateMagazineDto);
+            magazine = await this.magazineRepository.Update(magazine);
             return _mapper.Map<MagazineDto>(magazine);
         }
     }

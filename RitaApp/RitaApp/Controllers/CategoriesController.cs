@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using RitaApp.DTOs;
 using RitaApp.DTOs.CreateDto;
+using RitaApp.DTOs.UpdateDto;
 using RitaApp.Services;
 
 namespace RitaApp.Controllers
@@ -32,9 +33,16 @@ namespace RitaApp.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Create(CreateCategoryDto createCategoryDto)
+        public async Task<ActionResult> Create([FromBody] CreateCategoryDto createCategoryDto)
         {
             var categoryDto = await _categoryService.Create(createCategoryDto);
+            return Ok(categoryDto);
+        }
+
+        [HttpPut]
+        public async Task<ActionResult<CategoryDto>> Update([FromBody] UpdateCategoryDto updateCategoryDto)
+        {
+            var categoryDto = await _categoryService.Update(updateCategoryDto);
             return Ok(categoryDto);
         }
     }

@@ -3,6 +3,7 @@ using AutoMapper;
 using RitaApp.Data.Models;
 using RitaApp.DTOs;
 using RitaApp.DTOs.CreateDto;
+using RitaApp.DTOs.UpdateDto;
 using RitaApp.Repositories;
 
 namespace RitaApp.Services
@@ -38,6 +39,13 @@ namespace RitaApp.Services
             var category = _mapper.Map<Category>(createCategoryDto);
             category = await this.categoryRepository.Create(category);
             return _mapper.Map<CategoryDto>(category); 
+        }
+
+        public async Task<CategoryDto> Update(UpdateCategoryDto updateCategoryDto)
+        {
+            var category = _mapper.Map<Category>(updateCategoryDto);
+            category = await this.categoryRepository.Update(category);
+            return _mapper.Map<CategoryDto>(category);
         }
     }
 }

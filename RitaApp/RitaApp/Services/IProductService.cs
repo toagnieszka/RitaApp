@@ -1,5 +1,6 @@
 ﻿using RitaApp.DTOs;
 using RitaApp.DTOs.CreateDto;
+using RitaApp.DTOs.UpdateDto;
 
 namespace RitaApp.Services
 {
@@ -8,5 +9,6 @@ namespace RitaApp.Services
         public Task<List<ProductDto>> GetAll();
         public Task<ProductDto> GetById(int id);
         public Task<ProductDto> Create(CreateProductDto createProductDto);
+        public Task<ProductDto> Update(UpdateProductDto updateProductDto);
     }
 }

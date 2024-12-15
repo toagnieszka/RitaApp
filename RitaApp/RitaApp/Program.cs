@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using RitaApp.Data;
+using RitaApp.Middleware;
 using RitaApp.Repositories;
 using RitaApp.Services;
 
@@ -23,6 +24,7 @@ builder.Services.AddScoped<IProductCardService, ProductCardService>();
 builder.Services.AddScoped<IUnitService, UnitService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+builder.Services.AddScoped<ExceptionHandlingMiddleware>();
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
@@ -38,6 +40,8 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+
+app.UseMiddleware<ExceptionHandlingMiddleware>();
 
 app.MapControllers();
 
