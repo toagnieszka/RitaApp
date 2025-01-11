@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using FluentValidation;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using RitaApp.DTOs;
 using RitaApp.DTOs.CreateDto;
@@ -12,10 +13,15 @@ namespace RitaApp.Controllers
     public class CategoriesController : ControllerBase
     {
         private readonly ICategoryService _categoryService;
+        private readonly IValidator<CreateCategoryDto> _createCategoryDtoValidator;
 
-        public CategoriesController(ICategoryService categoryService)
+
+        public CategoriesController(
+            ICategoryService categoryService,
+            IValidator<CreateCategoryDto> createCategoryDtoValidator)
         {
             _categoryService = categoryService;
+            _createCategoryDtoValidator = createCategoryDtoValidator;
         }
 
         [HttpGet]
@@ -33,8 +39,9 @@ namespace RitaApp.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Create([FromBody] CreateCategoryDto createCategoryDto)
+        public async Task<ActionResult<CategoryDto>> Create([FromBody] CreateCategoryDto createCategoryDto)
         {
+            _createCategoryDtoValidator.ValidateAndThrow(createCategoryDto);
             var categoryDto = await _categoryService.Create(createCategoryDto);
             return Ok(categoryDto);
         }

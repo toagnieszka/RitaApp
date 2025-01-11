@@ -1,4 +1,5 @@
 ﻿
+using FluentValidation;
 using RitaApp.Exceptions;
 
 namespace RitaApp.Middleware
@@ -11,17 +12,23 @@ namespace RitaApp.Middleware
             {
                 await next.Invoke(context);
             }
-            catch(NotFoundException ex)
+            catch (NotFoundException ex)
             {
                 context.Response.ContentType = "text/plain";
                 context.Response.StatusCode = 404;
                 await context.Response.WriteAsync(ex.Message);
             }
-            catch(InternalServerError ex)
+            catch (ValidationException ex)
             {
-                context.Response.ContentType= "text/plain";
-                context.Response.StatusCode = 500;
+                context.Response.ContentType = "text/plain";
+                context.Response.StatusCode = 400;
                 await context.Response.WriteAsync(ex.Message);
+            }
+            catch (Exception)
+            {
+                context.Response.ContentType = "text/plain";
+                context.Response.StatusCode = 500;
+                await context.Response.WriteAsync("Internal server error");
             }
         }
     }

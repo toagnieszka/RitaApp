@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using FluentValidation;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using RitaApp.DTOs;
 using RitaApp.DTOs.CreateDto;
@@ -12,10 +13,14 @@ namespace RitaApp.Controllers
     public class MagazinesController : ControllerBase
     {
         private readonly IMagazineService _magazinesService;
+        private readonly IValidator<CreateMagazineDto> _createMagazineDtoValidator;
 
-        public MagazinesController(IMagazineService magazineService)
+        public MagazinesController(
+            IMagazineService magazineService,
+            IValidator<CreateMagazineDto> createMagazineDtoValidator)
         {
             _magazinesService = magazineService;
+            _createMagazineDtoValidator = createMagazineDtoValidator;
         }
 
         [HttpGet]
@@ -33,8 +38,9 @@ namespace RitaApp.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Create([FromBody] CreateMagazineDto createMagazineDto)
+        public async Task<ActionResult<MagazineDto>> Create([FromBody] CreateMagazineDto createMagazineDto)
         {
+            _createMagazineDtoValidator.ValidateAndThrow(createMagazineDto);
             var magazineDto = await _magazinesService.Create(createMagazineDto);
             return Ok(magazineDto);
         }

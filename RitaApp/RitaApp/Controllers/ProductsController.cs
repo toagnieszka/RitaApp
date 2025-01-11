@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using FluentValidation;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using RitaApp.DTOs;
 using RitaApp.DTOs.CreateDto;
@@ -12,10 +13,14 @@ namespace RitaApp.Controllers
     public class ProductsController : ControllerBase
     {
         private readonly IProductService _productService;
+        private readonly IValidator<CreateProductDto> _createProductDtoValidator;
 
-        public ProductsController(IProductService productService)
+        public ProductsController(
+            IProductService productService,
+            IValidator<CreateProductDto> createProductDtoValidator)
         {
             _productService = productService;
+            _createProductDtoValidator = createProductDtoValidator;
         }
 
         [HttpGet]
@@ -33,8 +38,9 @@ namespace RitaApp.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Create([FromBody] CreateProductDto createProductDto)
+        public async Task<ActionResult<ProductDto>> Create([FromBody] CreateProductDto createProductDto)
         {
+            _createProductDtoValidator.ValidateAndThrow(createProductDto);
             var productDto = await _productService.Create(createProductDto);
             return Ok(productDto);
         }

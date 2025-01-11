@@ -1,8 +1,10 @@
+using RitaApp.DTOs.Validation;
 using Microsoft.EntityFrameworkCore;
 using RitaApp.Data;
 using RitaApp.Middleware;
 using RitaApp.Repositories;
 using RitaApp.Services;
+using FluentValidation;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,6 +19,9 @@ builder.Services.AddDbContext<RitaAppDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("RitaAppConnectionString"));
 });
+
+builder.Services.AddValidatorsFromAssemblyContaining<CreateCategoryDtoValidator>();
+
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<IMagazineService, MagazineService>();
 builder.Services.AddScoped<IProductService, ProductService>();

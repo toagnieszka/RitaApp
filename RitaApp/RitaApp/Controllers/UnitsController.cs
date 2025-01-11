@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using FluentValidation;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using RitaApp.DTOs;
 using RitaApp.DTOs.CreateDto;
@@ -12,9 +13,14 @@ namespace RitaApp.Controllers
     public class UnitsController : ControllerBase
     {
         private readonly IUnitService _unitService;
-        public UnitsController(IUnitService unitService) 
+        private readonly IValidator<CreateUnitDto> _createUnitDtoValidator;
+
+        public UnitsController(
+            IUnitService unitService,
+            IValidator<CreateUnitDto> createUnitDtoValidator) 
         {
             _unitService = unitService;
+            _createUnitDtoValidator = createUnitDtoValidator;
         }
 
         [HttpGet]
@@ -32,8 +38,9 @@ namespace RitaApp.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Create([FromBody] CreateUnitDto createUnitDto)
+        public async Task<ActionResult<UnitDto>> Create([FromBody] CreateUnitDto createUnitDto)
         {
+            _createUnitDtoValidator.ValidateAndThrow(createUnitDto);
             var unitDto = await _unitService.Create(createUnitDto);
             return Ok(unitDto);
         }
