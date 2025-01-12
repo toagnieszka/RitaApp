@@ -14,13 +14,16 @@ namespace RitaApp.Controllers
     {
         private readonly IMagazineService _magazinesService;
         private readonly IValidator<CreateMagazineDto> _createMagazineDtoValidator;
+        private readonly IValidator<UpdateMagazineDto> _updateMagazineDtoValidator;
 
         public MagazinesController(
             IMagazineService magazineService,
-            IValidator<CreateMagazineDto> createMagazineDtoValidator)
+            IValidator<CreateMagazineDto> createMagazineDtoValidator,
+            IValidator<UpdateMagazineDto> updateMagazineDtoValidator)
         {
             _magazinesService = magazineService;
             _createMagazineDtoValidator = createMagazineDtoValidator;
+            _updateMagazineDtoValidator= updateMagazineDtoValidator;
         }
 
         [HttpGet]
@@ -48,6 +51,7 @@ namespace RitaApp.Controllers
         [HttpPut]
         public async Task<ActionResult<MagazineDto>> Update([FromBody] UpdateMagazineDto updateMagazineDto)
         {
+            _updateMagazineDtoValidator.ValidateAndThrow(updateMagazineDto);
             var magazineDto = await _magazinesService.Update(updateMagazineDto);
             return Ok(magazineDto);
         }

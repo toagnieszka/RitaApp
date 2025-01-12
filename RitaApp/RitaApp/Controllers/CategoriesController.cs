@@ -14,14 +14,16 @@ namespace RitaApp.Controllers
     {
         private readonly ICategoryService _categoryService;
         private readonly IValidator<CreateCategoryDto> _createCategoryDtoValidator;
-
+        private readonly IValidator<UpdateCategoryDto> _updateCategoryDtoValidator;
 
         public CategoriesController(
             ICategoryService categoryService,
-            IValidator<CreateCategoryDto> createCategoryDtoValidator)
+            IValidator<CreateCategoryDto> createCategoryDtoValidator,
+            IValidator<UpdateCategoryDto> updateCategoryDtoValidator)
         {
             _categoryService = categoryService;
             _createCategoryDtoValidator = createCategoryDtoValidator;
+            _updateCategoryDtoValidator = updateCategoryDtoValidator;
         }
 
         [HttpGet]
@@ -49,6 +51,7 @@ namespace RitaApp.Controllers
         [HttpPut]
         public async Task<ActionResult<CategoryDto>> Update([FromBody] UpdateCategoryDto updateCategoryDto)
         {
+            _updateCategoryDtoValidator.ValidateAndThrow(updateCategoryDto);
             var categoryDto = await _categoryService.Update(updateCategoryDto);
             return Ok(categoryDto);
         }

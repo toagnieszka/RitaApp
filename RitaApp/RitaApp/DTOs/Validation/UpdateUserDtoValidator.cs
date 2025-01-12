@@ -1,13 +1,16 @@
 ﻿using FluentValidation;
-using RitaApp.DTOs.CreateDto;
-using static System.Net.Mime.MediaTypeNames;
+using RitaApp.DTOs.UpdateDto;
 
 namespace RitaApp.DTOs.Validation
 {
-    public class CreateUserDtoValidator : AbstractValidator<CreateUserDto>
+    public class UpdateUserDtoValidator : AbstractValidator<UpdateUserDto>
     {
-        public CreateUserDtoValidator() 
+        public UpdateUserDtoValidator()
         {
+            RuleFor(x => x.Id)
+               .NotNull().WithMessage("Nie odnaleziono takiego obiektu")
+               .NotEmpty().WithMessage("Pole nie może być puste.");
+
             RuleFor(x => x.FirstName)
                .NotEmpty().WithMessage("Pole nie może być puste.")
                .MaximumLength(30).WithMessage("Maksymalna ilość znaków to 30.")

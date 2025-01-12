@@ -14,13 +14,16 @@ namespace RitaApp.Controllers
     {
         private readonly IProductCardService _productCardService;
         private readonly IValidator<CreateProductCardDto> _createProductCardDtoValidator;
+        private readonly IValidator<UpdateProductCardDto> _updateProductCardDtoValidator;
 
         public ProductCardsController (
             IProductCardService productCardService,
-            IValidator<CreateProductCardDto> createProductCardDtoValidator)
+            IValidator<CreateProductCardDto> createProductCardDtoValidator,
+            IValidator<UpdateProductCardDto> updateProductCardDtoValidator)
         {
             _productCardService = productCardService;
             _createProductCardDtoValidator = createProductCardDtoValidator;
+            _updateProductCardDtoValidator = updateProductCardDtoValidator;
         }
 
         [HttpGet]
@@ -48,6 +51,7 @@ namespace RitaApp.Controllers
         [HttpPut]
         public async Task<ActionResult<ProductCardDto>> Update([FromBody] UpdateProductCardDto updateProductCardDto)
         {
+            _updateProductCardDtoValidator.ValidateAndThrow(updateProductCardDto);
             var productCardDto = await _productCardService.Update(updateProductCardDto);
             return Ok(productCardDto);
         }

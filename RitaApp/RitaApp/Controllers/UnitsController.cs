@@ -14,13 +14,16 @@ namespace RitaApp.Controllers
     {
         private readonly IUnitService _unitService;
         private readonly IValidator<CreateUnitDto> _createUnitDtoValidator;
+        private readonly IValidator<UpdateUnitDto> _updateUnitDtoValidator;
 
         public UnitsController(
             IUnitService unitService,
-            IValidator<CreateUnitDto> createUnitDtoValidator) 
+            IValidator<CreateUnitDto> createUnitDtoValidator,
+            IValidator<UpdateUnitDto> updateUnitDtoValidator) 
         {
             _unitService = unitService;
             _createUnitDtoValidator = createUnitDtoValidator;
+            _updateUnitDtoValidator = updateUnitDtoValidator;
         }
 
         [HttpGet]
@@ -48,6 +51,7 @@ namespace RitaApp.Controllers
         [HttpPut]
         public async Task<ActionResult<UnitDto>> Update([FromBody] UpdateUnitDto updateUnitDto)
         {
+            _updateUnitDtoValidator.ValidateAndThrow(updateUnitDto);
             var unitDto = await _unitService.Update(updateUnitDto);
             return Ok(unitDto);
         }

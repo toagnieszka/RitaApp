@@ -1,11 +1,11 @@
 ﻿using FluentValidation;
-using RitaApp.DTOs.CreateDto;
+using RitaApp.DTOs.UpdateDto;
 
 namespace RitaApp.DTOs.Validation
 {
-    public class CreateProductCardDtoValidator : AbstractValidator<CreateProductCardDto>
+    public class UpdateProductCardDtoValidator: AbstractValidator<UpdateProductCardDto>
     {
-        public CreateProductCardDtoValidator() 
+        public UpdateProductCardDtoValidator()
         {
             RuleFor(x => x.Name)
                .NotEmpty().WithMessage("Pole nie może być puste.")
@@ -17,6 +17,10 @@ namespace RitaApp.DTOs.Validation
 
             RuleFor(x => x.CategoryId)
                 .NotEmpty().WithMessage("Pole nie może być puste.");
+
+            RuleFor(x => x.Id)
+               .NotNull().WithMessage("Nie odnaleziono takiego obiektu")
+               .NotEmpty().WithMessage("Pole nie może być puste.");
         }
     }
 }

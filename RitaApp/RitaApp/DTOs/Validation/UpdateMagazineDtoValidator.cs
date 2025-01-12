@@ -1,11 +1,11 @@
 ﻿using FluentValidation;
-using RitaApp.DTOs.CreateDto;
+using RitaApp.DTOs.UpdateDto;
 
 namespace RitaApp.DTOs.Validation
 {
-    public class CreateMagazineDtoValidator : AbstractValidator<CreateMagazineDto>
+    public class UpdateMagazineDtoValidator : AbstractValidator<UpdateMagazineDto>
     {
-        public CreateMagazineDtoValidator()
+        public UpdateMagazineDtoValidator()
         {
             RuleFor(x => x.Name)
                .NotEmpty().WithMessage("Pole nie może być puste.")
@@ -15,6 +15,10 @@ namespace RitaApp.DTOs.Validation
             RuleFor(x => x.Location)
                .NotEmpty().WithMessage("Pole nie może być puste.")
                .MaximumLength(50).WithMessage("Maksymalna ilość znaków to 50.");
+
+            RuleFor(x => x.Id)
+               .NotNull().WithMessage("Nie odnaleziono takiego obiektu")
+               .NotEmpty().WithMessage("Pole nie może być puste.");
         }
     }
 }
