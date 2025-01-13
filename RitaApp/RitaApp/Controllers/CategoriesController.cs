@@ -19,11 +19,13 @@ namespace RitaApp.Controllers
         public CategoriesController(
             ICategoryService categoryService,
             IValidator<CreateCategoryDto> createCategoryDtoValidator,
-            IValidator<UpdateCategoryDto> updateCategoryDtoValidator)
+            IValidator<UpdateCategoryDto> updateCategoryDtoValidator,
+            ILogger<CategoriesController> logger)
         {
             _categoryService = categoryService;
             _createCategoryDtoValidator = createCategoryDtoValidator;
             _updateCategoryDtoValidator = updateCategoryDtoValidator;
+            logger.LogInformation("We are in categories");
         }
 
         [HttpGet]

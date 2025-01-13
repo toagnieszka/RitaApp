@@ -5,8 +5,12 @@ using RitaApp.Middleware;
 using RitaApp.Repositories;
 using RitaApp.Services;
 using FluentValidation;
+using NLog.Web;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Logging.ClearProviders();
+builder.Logging.SetMinimumLevel(LogLevel.Trace);
+builder.Host.UseNLog();
 
 // Add services to the container.
 

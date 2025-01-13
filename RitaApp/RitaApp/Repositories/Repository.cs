@@ -9,11 +9,13 @@ namespace RitaApp.Repositories
     {
         protected readonly RitaAppDbContext _context;
         private DbSet<T> models;
+        private readonly ILogger<Repository<T>> Logger;
 
-        public Repository(RitaAppDbContext context)
+        public Repository(RitaAppDbContext context, ILogger<Repository<T>> logger)
         {
             _context = context;
             models = context.Set<T>();
+            Logger = logger;
         }
         public async Task<List<T>> GetAll()
         {
@@ -27,6 +29,7 @@ namespace RitaApp.Repositories
 
             if(model is null)
             {
+                Logger.LogError("Not found exception in repository");
                 throw new NotFoundException($"Item with id: {id} does not exist");
             }
 
@@ -47,6 +50,7 @@ namespace RitaApp.Repositories
 
             if(existingModel is null)
             {
+                Logger.LogError("Not found exception in repository");
                 throw new NotFoundException($"Item with id: {model.Id} does not exist");
             }
 
@@ -63,6 +67,7 @@ namespace RitaApp.Repositories
 
             if (existingModel is null)
             {
+                Logger.LogError("Not found exception in repository");
                 throw new NotFoundException($"Item with id: {id} does not exist");
             }
 

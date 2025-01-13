@@ -19,11 +19,13 @@ namespace RitaApp.Controllers
         public MagazinesController(
             IMagazineService magazineService,
             IValidator<CreateMagazineDto> createMagazineDtoValidator,
-            IValidator<UpdateMagazineDto> updateMagazineDtoValidator)
+            IValidator<UpdateMagazineDto> updateMagazineDtoValidator,
+            ILogger<MagazinesController> logger)
         {
             _magazinesService = magazineService;
             _createMagazineDtoValidator = createMagazineDtoValidator;
             _updateMagazineDtoValidator= updateMagazineDtoValidator;
+            logger.LogInformation("We are in magazines");
         }
 
         [HttpGet]

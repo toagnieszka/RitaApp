@@ -19,11 +19,13 @@ namespace RitaApp.Controllers
         public UnitsController(
             IUnitService unitService,
             IValidator<CreateUnitDto> createUnitDtoValidator,
-            IValidator<UpdateUnitDto> updateUnitDtoValidator) 
+            IValidator<UpdateUnitDto> updateUnitDtoValidator,
+            ILogger<UnitsController> logger) 
         {
             _unitService = unitService;
             _createUnitDtoValidator = createUnitDtoValidator;
             _updateUnitDtoValidator = updateUnitDtoValidator;
+            logger.LogInformation("We are in units");
         }
 
         [HttpGet]

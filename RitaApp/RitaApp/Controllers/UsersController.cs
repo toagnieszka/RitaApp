@@ -19,11 +19,13 @@ namespace RitaApp.Controllers
         public UsersController(
             IUserService userService,
             IValidator<CreateUserDto> createUserDtoValidator,
-            IValidator<UpdateUserDto> updateUserDtoValidator)
+            IValidator<UpdateUserDto> updateUserDtoValidator,
+            ILogger<UsersController> logger)
         {
             _userService = userService;
             _createUserDtoValidator = createUserDtoValidator;
             _updateUserDtoValidator = updateUserDtoValidator;
+            logger.LogInformation("We are in users");
         }
 
         [HttpGet]

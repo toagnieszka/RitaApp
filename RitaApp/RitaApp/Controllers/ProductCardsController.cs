@@ -19,11 +19,13 @@ namespace RitaApp.Controllers
         public ProductCardsController (
             IProductCardService productCardService,
             IValidator<CreateProductCardDto> createProductCardDtoValidator,
-            IValidator<UpdateProductCardDto> updateProductCardDtoValidator)
+            IValidator<UpdateProductCardDto> updateProductCardDtoValidator,
+            ILogger<ProductCardsController> logger)
         {
             _productCardService = productCardService;
             _createProductCardDtoValidator = createProductCardDtoValidator;
             _updateProductCardDtoValidator = updateProductCardDtoValidator;
+            logger.LogInformation("We are in Product Cards");
         }
 
         [HttpGet]
