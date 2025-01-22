@@ -8,7 +8,9 @@ namespace RitaApp.Repositories
 
         Task<T> GetById(int id);
 
-        Task<T> Create(T model);
+        //Task<User> GetUserByEmail(string email);
+
+		Task<T> Create(T model);
 
         Task<T> Update(T model);
 

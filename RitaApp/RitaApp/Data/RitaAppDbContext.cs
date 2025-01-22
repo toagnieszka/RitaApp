@@ -1,12 +1,14 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using RitaApp.Data.Models;
 
 namespace RitaApp.Data
 {
-    public class RitaAppDbContext : DbContext
+    public class RitaAppDbContext : IdentityDbContext<IdentityUser>
     {
-        public RitaAppDbContext(DbContextOptions<RitaAppDbContext> options) 
-            : base(options) 
+        public RitaAppDbContext(DbContextOptions<RitaAppDbContext> options)
+            : base(options)
         {
         }
 
@@ -15,10 +17,11 @@ namespace RitaApp.Data
         public DbSet<Product>Products => Set<Product>();
         public DbSet<ProductCard>ProductCards => Set<ProductCard>();
         public DbSet<Unit>Units => Set<Unit>();
-        public DbSet<User>Users => Set<User>();
+       // public DbSet<User>Users => Set<User>();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Category>()
                 .Property(e => e.CreatedDate)
                 .HasDefaultValueSql("GETDATE()");
@@ -34,9 +37,9 @@ namespace RitaApp.Data
             modelBuilder.Entity<Unit>()
                 .Property(e => e.CreatedDate)
                 .HasDefaultValueSql("GETDATE()");
-            modelBuilder.Entity<User>()
-                .Property(e => e.CreatedDate)
-                .HasDefaultValueSql("GETDATE()");
+            //modelBuilder.Entity<User>()
+            //    .Property(e => e.CreatedDate)
+            //    .HasDefaultValueSql("GETDATE()");
         }
 
     }
