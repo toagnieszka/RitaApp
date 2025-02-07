@@ -2,10 +2,10 @@
 {
     public enum Status
     {
-        Active,
-        Inactive,
-        Loaned,
-        Dispensed,
-        Deleted
-    }
+		Dostępny,
+		Niedostępny,
+		Wypożyczony,
+		Wydany,
+		Usunięty
+	}
 }
