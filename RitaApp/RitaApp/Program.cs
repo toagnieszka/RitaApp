@@ -44,6 +44,8 @@ builder.Services.AddScoped<IMagazineService, MagazineService>();
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IProductCardService, ProductCardService>();
 builder.Services.AddScoped<IUnitService, UnitService>();
+builder.Services.AddScoped<IProductCardRepository, ProductCardRepository>();
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
 //builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 builder.Services.AddScoped<ExceptionHandlingMiddleware>();

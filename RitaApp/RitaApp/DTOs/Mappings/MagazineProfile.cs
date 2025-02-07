@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using RitaApp.Data.Models;
 using RitaApp.DTOs.CreateDto;
+using RitaApp.DTOs.UpdateDto;
 
 namespace RitaApp.DTOs.Mappings
 {
@@ -12,7 +13,7 @@ namespace RitaApp.DTOs.Mappings
 
             CreateMap<CreateMagazineDto, Magazine>();
 
-            CreateMap<CreateMagazineDto, Magazine>();
+            CreateMap<UpdateMagazineDto, Magazine>();
         }
     }
 }

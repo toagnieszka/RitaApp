@@ -6,10 +6,9 @@ namespace RitaApp.DTOs
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public List<Category> Category { get; set; }
-        public int CategoryId { get; set; }
-        public Unit Unit { get; set; }
+        public List<CategoryDto> Categories { get; set; }
         public int UnitId { get; set; }
+        public UnitDto Unit { get; set; }
         public DateTime CreatedDate { get; set; }
     }
 }

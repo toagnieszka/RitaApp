@@ -11,9 +11,13 @@ namespace RitaApp.DTOs.Mappings
         {
             CreateMap<ProductCard, ProductCardDto>();
 
-            CreateMap<CreateProductCardDto, ProductCard>();
+            CreateMap<CreateProductCardDto, ProductCard>()
+				 .ForMember(x => x.Categories, y => y.MapFrom(z => z.CategoryIds));
 
-            CreateMap<UpdateProductCardDto, ProductCard>();
+			CreateMap<int, Category>()
+		   .ForMember(x => x.Id, y => y.MapFrom(z => z));
+
+			CreateMap<UpdateProductCardDto, ProductCard>();
         }
     }
 }

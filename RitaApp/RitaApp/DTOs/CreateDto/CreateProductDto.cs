@@ -5,9 +5,7 @@ namespace RitaApp.DTOs.CreateDto
 {
     public class CreateProductDto
     {
-        public ProductCard ProductCard { get; set; }
         public int ProductCardId { get; set; }
-        public Magazine Magazine { get; set; }
         public int MagazineId { get; set; }
         public float Amount { get; set; }
         public Status Status { get; set; }

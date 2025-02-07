@@ -10,7 +10,6 @@ namespace RitaApp.Repositories
         protected readonly RitaAppDbContext _context;
         private DbSet<T> models;
         private readonly ILogger<Repository<T>> Logger;
-        public string Email { get; set; }
 
         public Repository(RitaAppDbContext context, ILogger<Repository<T>> logger)
         {
@@ -23,11 +22,6 @@ namespace RitaApp.Repositories
             var modelsList = await models.ToListAsync();
             return modelsList;
         }
-
-        //public Task<User> GetUserByEmail (string email)
-        //{
-        //    return _context.Users.FirstOrDefaultAsync(x => x.Email == email);
-        //}
 
         public async Task<T> GetById(int id)
         {

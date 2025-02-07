@@ -4,22 +4,24 @@ using RitaApp.DTOs;
 using RitaApp.DTOs.CreateDto;
 using RitaApp.DTOs.UpdateDto;
 using RitaApp.Repositories;
+using System.Reflection.Metadata;
 
 namespace RitaApp.Services
 {
     public class ProductService : IProductService
     {
-        private readonly IRepository<Product> productRepository;
         private readonly IMapper _mapper;
+		private readonly IProductRepository productRepository;
 
-        public ProductService(IRepository<Product> productRepository, IMapper mapper)
-        {
-            this.productRepository = productRepository;
+		public ProductService(IMapper mapper, IProductRepository productRepository)
+        { 
+
             _mapper = mapper;
+			this.productRepository = productRepository;
         }
         public async Task<List<ProductDto>> GetAll()
         {
-            var products = await this.productRepository.GetAll();
+            var products = await productRepository.GetAll();
             var productsDto = _mapper.Map<List<ProductDto>>(products);
             return productsDto;
         }
@@ -33,7 +35,7 @@ namespace RitaApp.Services
 
         public async Task<ProductDto> Create(CreateProductDto createProductDto)
         {
-            var product = _mapper.Map<Product>(createProductDto);
+			var product = _mapper.Map<Product>(createProductDto);
             product = await this.productRepository.Create(product);
             return _mapper.Map<ProductDto>(product);
         }

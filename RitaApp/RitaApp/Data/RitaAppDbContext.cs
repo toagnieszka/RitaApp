@@ -40,6 +40,10 @@ namespace RitaApp.Data
             //modelBuilder.Entity<User>()
             //    .Property(e => e.CreatedDate)
             //    .HasDefaultValueSql("GETDATE()");
+            modelBuilder.Entity<ProductCard>()
+                .HasMany(e => e.Categories);
+            modelBuilder.Entity<Product>()
+                .HasOne(e => e.ProductCard);
         }
 
     }

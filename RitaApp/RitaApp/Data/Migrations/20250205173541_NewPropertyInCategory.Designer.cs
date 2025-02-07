@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RitaApp.Data;
 
@@ -11,9 +12,11 @@ using RitaApp.Data;
 namespace RitaApp.Data.Migrations
 {
     [DbContext(typeof(RitaAppDbContext))]
-    partial class RitaAppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250205173541_NewPropertyInCategory")]
+    partial class NewPropertyInCategory
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

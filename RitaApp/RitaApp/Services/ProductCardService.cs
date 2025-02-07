@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using RitaApp.Data.Models;
 using RitaApp.DTOs;
 using RitaApp.DTOs.CreateDto;
@@ -9,19 +10,20 @@ namespace RitaApp.Services
 {
     public class ProductCardService : IProductCardService
     {
-        private readonly IRepository<ProductCard> productCardRepository;
+        private readonly IProductCardRepository productCardRepository;
         private readonly IMapper _mapper;
 
         public ProductCardService(
-            IRepository<ProductCard> productCardRepository,
-            IMapper mapper) 
+            IMapper mapper,
+            IProductCardRepository productCardRepository) 
         {
             this.productCardRepository = productCardRepository;
             _mapper = mapper;
         }
+
         public async Task<List<ProductCardDto>> GetAll()
         {
-            var productCards = await this.productCardRepository.GetAll();
+            var productCards = await productCardRepository.GetAll();
             var productCardsDto = _mapper.Map<List<ProductCardDto>>(productCards);
             return productCardsDto;
         }
@@ -36,7 +38,7 @@ namespace RitaApp.Services
         public async Task<ProductCardDto> Create(CreateProductCardDto createProductCardDto)
         {
             var productCard = _mapper.Map<ProductCard>(createProductCardDto);
-            productCard = await this.productCardRepository.Create(productCard);
+            productCard = await productCardRepository.Create(productCard);
             return _mapper.Map<ProductCardDto>(productCard);
         }
 

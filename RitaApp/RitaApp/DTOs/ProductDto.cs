@@ -1,14 +1,13 @@
-﻿using RitaApp.Data.Models;
-using RitaApp.Data;
+﻿using RitaApp.Data;
 
 namespace RitaApp.DTOs
 {
     public class ProductDto
     {
         public int Id { get; set; }
-        public ProductCard ProductCard { get; set; }
+        public ProductCardDto ProductCard { get; set; }
         public int ProductCardId { get; set; }
-        public Magazine Magazine { get; set; }
+        public MagazineDto Magazine { get; set; }
         public int MagazineId { get; set; }
         public float Amount { get; set; }
         public Status Status { get; set; }

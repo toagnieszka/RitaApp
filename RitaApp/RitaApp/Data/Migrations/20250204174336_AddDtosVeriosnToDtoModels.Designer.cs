@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RitaApp.Data;
 
@@ -11,9 +12,11 @@ using RitaApp.Data;
 namespace RitaApp.Data.Migrations
 {
     [DbContext(typeof(RitaAppDbContext))]
-    partial class RitaAppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250204174336_AddDtosVeriosnToDtoModels")]
+    partial class AddDtosVeriosnToDtoModels
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,21 +24,6 @@ namespace RitaApp.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("CategoryProductCard", b =>
-                {
-                    b.Property<int>("CategoriesId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProductCardsId")
-                        .HasColumnType("int");
-
-                    b.HasKey("CategoriesId", "ProductCardsId");
-
-                    b.HasIndex("ProductCardsId");
-
-                    b.ToTable("CategoryProductCard");
-                });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
@@ -252,7 +240,12 @@ namespace RitaApp.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("ProductCardId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("ProductCardId");
 
                     b.ToTable("Categories");
                 });
@@ -343,6 +336,9 @@ namespace RitaApp.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("CreatedDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
@@ -379,28 +375,9 @@ namespace RitaApp.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ShortName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id");
 
                     b.ToTable("Units");
-                });
-
-            modelBuilder.Entity("CategoryProductCard", b =>
-                {
-                    b.HasOne("RitaApp.Data.Models.Category", null)
-                        .WithMany()
-                        .HasForeignKey("CategoriesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("RitaApp.Data.Models.ProductCard", null)
-                        .WithMany()
-                        .HasForeignKey("ProductCardsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -454,6 +431,13 @@ namespace RitaApp.Data.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("RitaApp.Data.Models.Category", b =>
+                {
+                    b.HasOne("RitaApp.Data.Models.ProductCard", null)
+                        .WithMany("Category")
+                        .HasForeignKey("ProductCardId");
+                });
+
             modelBuilder.Entity("RitaApp.Data.Models.Product", b =>
                 {
                     b.HasOne("RitaApp.Data.Models.Magazine", "Magazine")
@@ -482,6 +466,11 @@ namespace RitaApp.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("Unit");
+                });
+
+            modelBuilder.Entity("RitaApp.Data.Models.ProductCard", b =>
+                {
+                    b.Navigation("Category");
                 });
 #pragma warning restore 612, 618
         }

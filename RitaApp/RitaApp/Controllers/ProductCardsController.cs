@@ -5,6 +5,7 @@ using RitaApp.DTOs;
 using RitaApp.DTOs.CreateDto;
 using RitaApp.DTOs.UpdateDto;
 using RitaApp.Services;
+using System.Reflection.Metadata;
 
 namespace RitaApp.Controllers
 {
@@ -45,7 +46,7 @@ namespace RitaApp.Controllers
         [HttpPost]
         public async Task<ActionResult<ProductCardDto>> Create([FromBody] CreateProductCardDto createProductCardDto)
         {
-            _createProductCardDtoValidator.ValidateAndThrow(createProductCardDto);
+			_createProductCardDtoValidator.ValidateAndThrow(createProductCardDto);
             var productCardDto = await _productCardService.Create(createProductCardDto);
             return Ok(productCardDto);
         }

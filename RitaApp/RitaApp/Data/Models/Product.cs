@@ -1,6 +1,4 @@
-﻿using System.Diagnostics.Contracts;
-
-namespace RitaApp.Data.Models
+﻿namespace RitaApp.Data.Models
 {
     public class Product : ModelBase
     {
