@@ -26,9 +26,6 @@ namespace RitaApp.DTOs.Validation
             RuleFor(x => x.LoanDate)
                 .LessThanOrEqualTo(DateTime.Now).WithMessage("Data nie może być z przyszłości.");
 
-            RuleFor(x => x.ExpireDate)
-                .GreaterThanOrEqualTo(DateTime.Now).WithMessage("Produkt przeterminowany");
-
             RuleFor(x => x.Lender)
                 .MaximumLength(60).WithMessage("Maksymalna ilość znaków to 60.");
 
