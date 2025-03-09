@@ -3,6 +3,7 @@ using RitaApp.Data.Models;
 using RitaApp.Data;
 using RitaApp.DTOs;
 using System.Reflection.Metadata;
+using RitaApp.Exceptions;
 
 namespace RitaApp.Repositories
 {
@@ -20,7 +21,6 @@ namespace RitaApp.Repositories
 				.Include(pt => pt.Categories)
 				.ToListAsync();
 		}
-
 
 		public async Task<ProductCard> Create(ProductCard productCard)
 		{
@@ -48,6 +48,38 @@ namespace RitaApp.Repositories
 			await _context.ProductCards.AddAsync(productCard!);
 			await _context.SaveChangesAsync();
 			return productCard!;
+		}
+
+		public async Task<ProductCard> Update(ProductCard productCard)
+		{
+			var existingModel = await _context.ProductCards.Include(x => x.Categories).FirstOrDefaultAsync(x => x.Id == productCard!.Id); 
+
+
+			if (existingModel is null)
+			{
+				throw new NotFoundException($"Item with id: {productCard.Id} does not exist");
+			}
+
+			existingModel.Categories.Clear();
+			await _context.SaveChangesAsync();
+
+			var categoryIds = productCard!.Categories!.Select(x => x.Id).ToList();
+			var categories = new List<Category>();
+
+			foreach (var id in categoryIds)
+			{
+				if (_context.Categories.FirstOrDefault(x => x.Id == id) is null)
+				{
+					continue;
+				}
+				categories.Add(_context.Categories.FirstOrDefault(x => x.Id == id)!);
+			}
+
+			_context.ProductCards.Entry(existingModel).CurrentValues.SetValues(productCard);
+			existingModel!.Categories = categories;
+			_context.ProductCards.Entry(existingModel).Property(x => x.CreatedDate).IsModified = false;
+			await _context.SaveChangesAsync();
+			return existingModel;
 		}
 	}
 }
