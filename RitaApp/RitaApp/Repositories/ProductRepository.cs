@@ -11,9 +11,17 @@ namespace RitaApp.Repositories
 
 		}
 	
-		public async Task<List<Product>> GetAll()
+		public async Task<List<Product>> GetAll(string? searchText)
 		{
-			return await _context.Products
+
+			var query = _context.Products.AsQueryable();
+
+			if (!string.IsNullOrEmpty(searchText))
+			{
+				query = query.Where(n => n.ProductCard.Name.Contains(searchText.ToLower()));
+			}
+
+			return await query
 				.Include(pt => pt.ProductCard.Categories)
 				.Include(pt => pt.ProductCard)
 				.ThenInclude(pt => pt.Unit)

@@ -39,7 +39,7 @@ namespace RitaApp.Repositories
 		public async Task<T> Create(T model)
         {
             await models.AddAsync(model);
-            await _context.SaveChangesAsync();
+			await _context.SaveChangesAsync();
             return model;
         }
 

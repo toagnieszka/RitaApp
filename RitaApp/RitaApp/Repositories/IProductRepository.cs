@@ -4,6 +4,6 @@ namespace RitaApp.Repositories
 {
 	public interface IProductRepository : IRepository<Product>
 	{
-		public Task<List<Product>> GetAll();
+		public Task<List<Product>> GetAll(string? searchText);
 	}
 }

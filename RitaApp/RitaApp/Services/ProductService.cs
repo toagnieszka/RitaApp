@@ -19,9 +19,9 @@ namespace RitaApp.Services
             _mapper = mapper;
 			this.productRepository = productRepository;
         }
-        public async Task<List<ProductDto>> GetAll()
+        public async Task<List<ProductDto>> GetAll(string? searchText)
         {
-            var products = await productRepository.GetAll();
+            var products = await productRepository.GetAll(searchText);
             var productsDto = _mapper.Map<List<ProductDto>>(products);
             return productsDto;
         }

@@ -29,9 +29,9 @@ namespace RitaApp.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<ProductDto>>> GetAll()
+        public async Task<ActionResult<List<ProductDto>>> GetAll([FromQuery] string? searchText)
         {
-            var productsDto = await _productService.GetAll();
+            var productsDto = await _productService.GetAll(searchText);
             return Ok(productsDto);
         }
 

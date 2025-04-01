@@ -6,7 +6,7 @@ namespace RitaApp.Services
 {
     public interface IProductService
     {
-        public Task<List<ProductDto>> GetAll();
+        public Task<List<ProductDto>> GetAll(string? searchText);
         public Task<ProductDto> GetById(int id);
         public Task<ProductDto> Create(CreateProductDto createProductDto);
         public Task<ProductDto> Update(UpdateProductDto updateProductDto);
