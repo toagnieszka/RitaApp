@@ -1,6 +1,9 @@
 ﻿using FluentValidation;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.VisualBasic;
+using RitaApp.Data;
+using RitaApp.Data.Models;
 using RitaApp.DTOs;
 using RitaApp.DTOs.CreateDto;
 using RitaApp.DTOs.UpdateDto;
@@ -29,9 +32,17 @@ namespace RitaApp.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<ProductDto>>> GetAll([FromQuery] string? searchText)
+        public async Task<ActionResult<List<ProductDto>>> GetAll(
+            [FromQuery] string? searchByName,
+            [FromQuery] string? category,
+            [FromQuery] string magazine,
+            [FromQuery] float? amount,
+            [FromQuery] string? unit,
+            [FromQuery] Status? status,
+            [FromQuery] DateTime? expireDateFrom,
+			[FromQuery] DateTime? expireDateTo)
         {
-            var productsDto = await _productService.GetAll(searchText);
+            var productsDto = await _productService.GetAll(searchByName, category, magazine, amount, unit, status, expireDateFrom, expireDateTo);
             return Ok(productsDto);
         }
 

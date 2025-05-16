@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using RitaApp.Data;
 using RitaApp.Data.Models;
 using RitaApp.DTOs;
 using RitaApp.DTOs.CreateDto;
@@ -19,9 +20,9 @@ namespace RitaApp.Services
             _mapper = mapper;
 			this.productRepository = productRepository;
         }
-        public async Task<List<ProductDto>> GetAll(string? searchText)
+        public async Task<List<ProductDto>> GetAll(string? searchByName, string? categories, string? magazine, float? amount, string? unit, Status? status, DateTime? expireDateFrom, DateTime? expireDateTo)
         {
-            var products = await productRepository.GetAll(searchText);
+            var products = await productRepository.GetAll(searchByName, categories, magazine, amount, unit, status, expireDateFrom, expireDateTo);
             var productsDto = _mapper.Map<List<ProductDto>>(products);
             return productsDto;
         }
